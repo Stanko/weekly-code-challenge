@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel ./src/index.html",
-    "build": "rm -rf ./public && parcel build ./src/index.html --out-dir docs --public-url /weekly-code-challenge"
+    "build": "rm -rf ./docs && parcel build ./src/index.html --out-dir docs --public-url /weekly-code-challenge && git add ./docs/*"
   },
   "repository": {
     "type": "git",
