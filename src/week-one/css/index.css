@@ -1,0 +1,135 @@
+body {
+  height: 600vh;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.main > div:nth-child(1) { z-index: 50 }
+.main > div:nth-child(2) { z-index: 49 }
+.main > div:nth-child(3) { z-index: 48 }
+.main > div:nth-child(4) { z-index: 47 }
+.main > div:nth-child(5) { z-index: 46 }
+.main > div:nth-child(6) { z-index: 45 }
+.main > div:nth-child(7) { z-index: 44 }
+.main > div:nth-child(8) { z-index: 43 }
+.main > div:nth-child(9) { z-index: 42 }
+.main > div:nth-child(10) { z-index: 41 }
+
+
+/* ---------- PILLARS ---------- */
+
+.pillars {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  padding-left: 10px;
+}
+
+.pillars-pillar {
+  border: 10px solid #234;
+  flex-grow: 1;
+  margin-left: -10px;
+}
+
+.pillars-pillar:nth-child(1) { background: #1abc9c; }
+.pillars-pillar:nth-child(2) { background: #2ecc71; }
+.pillars-pillar:nth-child(3) { background: #f1c40f; }
+.pillars-pillar:nth-child(4) { background: #e67e22; }
+.pillars-pillar:nth-child(5) { background: #e74c3c; }
+.pillars-pillar:nth-child(6) { background: #9b59b6; }
+.pillars-pillar:nth-child(7) { background: #95a5f6; }
+.pillars-pillar:nth-child(8) { background: #3498db; }
+
+.pillars-pillar:nth-child(even) {
+  box-shadow: 0 20px 5px 0 rgba(0,0,0,0.1);
+}
+
+.pillars-pillar:nth-child(odd) {
+  box-shadow: 0 -20px 5px 0 rgba(0,0,0,0.1);
+}
+
+
+/* ---------- LOCK ---------- */
+
+.lock {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+}
+
+.lock-left,
+.lock-right {
+  width: calc(50% + 5px);
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border: 10px solid #234;
+}
+
+.lock-left {
+  left: 0;
+  box-shadow: 20px 0 5px 0 rgba(0,0,0,0.1);
+  background: #bdc3c7;
+}
+
+.lock-right {
+  right: 0;
+  background: #aab1b4;
+}
+
+.lock-right.Plx--in-1 {
+  box-shadow: -20px 0 5px 0 rgba(0,0,0,0.1);
+}
+
+.lock-right.Plx--in-1 .lock-lock {
+  box-shadow: 10px 0 5px 0 rgba(0,0,0,0.1);
+}
+
+.lock-lock {
+  height: 100px;
+  width: 100px;
+  border: 10px solid #234;
+  border-radius: 100px;
+  background: white;
+  position: absolute;
+  top: 50%;
+  color: #234;
+  left: -55px; /* 50% + border */
+  margin-top: -50px;
+}
+
+
+/* ---------- HOLE ---------- */
+
+.hole {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+}
+
+.hole-table {
+  height: 110%;
+  width: 110%;
+  margin-left: -5%;
+  margin-top: -5%;
+}
+
+.hole-table {
+  border-collapse: collapse;
+}
+
+.hole td {
+  background: #2980b9
+}
+
+.hole-plx {
+  height: 1%;
+  width: 1%;
+  border: 10px solid #234;
+  background: none !important;
+  box-shadow: inset 0 0 5px 20px rgba(0,0,0,0.1);
+}
