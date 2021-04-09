@@ -15,6 +15,11 @@ body {
   text-align: center;
 }
 
+.status {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
 video {
   display: none;
 }
@@ -26,13 +31,22 @@ canvas {
 }
 
 button {
-  margin: 15px 0;
+  margin-top: 15px;
   padding: 3px 6px;
   font-size: 12px;
 }
 
-span {
+.info {
   margin-top: 30px;
-  display: block;
+  color: #778;
 }
 
+a, 
+a:visited {
+  color: #456;
+}
+
+a:hover,
+a:focus {
+  color: black;
+}

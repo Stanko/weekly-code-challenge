@@ -17,15 +17,17 @@
 
 <body>
   <div class="wrapper">
-    <div id="status" class="margin-bottom-10">Loading model...</div>
-
-    <button id="toggle-video" type="button" class="btn btn-sm margin-bottom-15" disabled>
-      Toggle Video
-    </button>
-
+    <div id="status" class="status">Loading model...</div>
     <video autoplay="autoplay" id="video"></video>
     <canvas id="canvas"></canvas>
-    <span>Desktop only for now, sorry!</span>
+    <button id="toggle-video" type="button" disabled>
+      Toggle Video
+    </button>
+    <div class="info">
+      Desktop only for now, sorry!
+      <br />
+      Powered by <a href="https://github.com/victordibia/handtrack.js/">handtrack.js</a> and <a href="https://github.com/Tonejs/Tone.js">tone.js</a>.
+    </div>
   </div>
   <script src="./week-two/js/index.js"></script>
 </body>
