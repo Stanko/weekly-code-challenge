@@ -1,5 +1,5 @@
-import * as handTrack from 'handtrackjs';
-import * as tone from 'tone';
+import { startVideo as htStartVideo, stopVideo as htStopVideo, load as htLoad } from 'handtrackjs';
+import { PolySynth, Reverb, Synth } from 'tone';
 
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
@@ -7,8 +7,8 @@ const context = canvas.getContext('2d');
 let toggleVideoButton = document.getElementById('toggle-video');
 let statusElement = document.getElementById('status');
 
-const synth = new tone.PolySynth(tone.Synth).toDestination();
-const reverb = new tone.Reverb(5, 1, 1).toDestination();
+const synth = new PolySynth(Synth).toDestination();
+const reverb = new Reverb(5, 1, 1).toDestination();
 synth.connect(reverb);
 
 let isVideo = false;
@@ -23,7 +23,7 @@ const modelParams = {
 };
 
 function startVideo() {
-  handTrack.startVideo(video).then(function (status) {
+  htStartVideo(video).then(function (status) {
     console.log('video started', status);
     if (status) {
       statusElement.innerText = 'Video started. Move your hands!';
@@ -41,7 +41,7 @@ function toggleVideo() {
     startVideo();
   } else {
     statusElement.innerText = 'Stopping video...';
-    handTrack.stopVideo(video);
+    htStopVideo(video);
     isVideo = false;
     statusElement.innerText = 'Video stopped.';
   }
@@ -140,7 +140,7 @@ function runDetection() {
 }
 
 // Load the model.
-handTrack.load(modelParams).then((lmodel) => {
+htLoad(modelParams).then((lmodel) => {
   // detect objects in the image.
   model = lmodel;
   statusElement.innerText = 'Loaded Model!';
