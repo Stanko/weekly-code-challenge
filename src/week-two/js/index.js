@@ -30,7 +30,7 @@ function startVideo() {
       isVideo = true;
       runDetection();
     } else {
-      statusElement.innerText = 'This demo request access to camera, please enable video.';
+      statusElement.innerText = 'This demo needs access to camera, please enable video.';
     }
   });
 }
