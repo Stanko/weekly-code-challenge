@@ -161,8 +161,8 @@ export default class Game {
 
   handleTouchStart = (e) => {
     if (this.running) {
-      // e.preventDefault();
-      // e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
     } else {
       this.restart();
     }
@@ -171,8 +171,8 @@ export default class Game {
 
   handleTouchMove = (e) => {
     if (this.running) {
-      // e.preventDefault();
-      // e.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
     }
   }
 
