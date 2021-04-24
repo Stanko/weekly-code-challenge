@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <title>Week four: "number(s)"</title>
+
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./week-four/css/index.css" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://muffinman.io/public/favicon/apple-touch-icon.png?v=v3"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://muffinman.io/public/favicon/favicon-32x32.png?v=v3"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://muffinman.io/public/favicon/favicon-16x16.png?v=v3"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://muffinman.io/public/favicon/favicon.ico?v=v3"
+    />
+  </head>
+
+  <body>
+    <main class="wrapper">
+      <div class="ui">
+        <div class="control">
+          <div class="intro">
+            <h1>Numbers</h1>
+            are boring.
+          </div>
+          <div class="control">
+            <h3>Turn them into</h3>
+            <label>
+              <input type="radio" name="mode" value="numbers" checked />
+              #
+            </label>
+            <label>
+              <input type="radio" name="mode" value="terrain" />
+              Terrain
+            </label>
+            <label>
+              <input type="radio" name="mode" value="wind" />
+              Wind
+            </label>
+            <label>
+              <input type="radio" name="mode" value="isolines" />
+              Iso lines
+            </label>
+          </div>
+          <h3>Animation</h3>
+          <label>
+            <input type="radio" name="animation" value="stop" checked />
+            Stop
+          </label>
+          <label>
+            <input type="radio" name="animation" value="slow" />
+            Slow
+          </label>
+          <label>
+            <input type="radio" name="animation" value="fast" />
+            Fast
+          </label>
+        </div>
+      </div>
+      <div class="sketch"></div>
+    </main>
+    <script src="./week-four/js/index.js"></script>
+  </body>
+</html>
