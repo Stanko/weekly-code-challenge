@@ -10,6 +10,7 @@ import levelMap from './map';
 import decalDiffuseImg from '../img/decal-diffuse.png';
 
 const DEBUG = window.location.hash === '#debug';
+const RANDOM_COLOR = window.location.hash === '#color';
 
 const MIN_SCALE = 30;
 const MAX_SCALE = 50;
@@ -153,6 +154,9 @@ const Game = (function () {
         size.set(scale, scale, scale);
 
         const material = decalMaterial.clone();
+        if (RANDOM_COLOR) {
+          material.color = new THREE.Color(0xffffff * Math.random());
+        }
 
         const m = new THREE.Mesh(
           new DecalGeometry(mesh, position, orientation, size),

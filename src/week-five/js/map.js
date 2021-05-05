@@ -8,8 +8,8 @@ x                    o   o     xxxxx
 x          o                       x
 x              xxx       o         x
 x    o  o  o   xt                  x
-X              x        xxxxx  xxxxx
-X              x                   x
+x              x        xxxxx  xxxxx
+x              x                   x
 x     t                 x          x
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 `;
