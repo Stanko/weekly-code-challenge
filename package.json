@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel ./src/index.html",
     "https": "parcel ./src/index.html --https",
-    "build": "rm -rf ./docs && parcel build ./src/index.html --out-dir docs --public-url /weekly-code-challenge && git add ./docs/*"
+    "build": "rm -rf ./docs && parcel build ./src/index.html --out-dir docs --public-url /weekly-code-challenge && git add ./docs"
   },
   "repository": {
     "type": "git",

@@ -53,6 +53,13 @@ export default function enablePointerLock(controls) {
     instructions.addEventListener(
       'click',
       function (event) {
+        if (
+          event.target.parentElement.className === 'content content--editor' ||
+          event.target.parentElement.parentElement.className ===
+            'content content--editor'
+        ) {
+          return;
+        }
         if (controls.done) {
           return;
         }

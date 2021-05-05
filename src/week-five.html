@@ -45,6 +45,7 @@
             <li>CLICK = Shoot</li>
             <li>MOUSE = Look around</li>
             <li>SHIFT = Walk</li>
+            <li>C = Toggle color</li>
           </ul>
           <div class="inspired-by">
             Inspired by
@@ -66,6 +67,21 @@
         <div class="content content--win">
           <h1>You found the exit, you are free!</h1>
           <div class="click-to-play">Refresh the page to play again</div>
+        </div>
+        <div class="content content--editor">
+          <button type="button" class="toggle-editor">Show map editor</button>
+          <div class="map-editor">
+            <ul class="legend">
+              <li>x = wall</li>
+              <li>X = exit</li>
+              <li>o = pillar</li>
+              <li>t = sphere</li>
+            </ul>
+            <pre contenteditable class="map"></pre>
+            <button type="button" class="save-map">Save</button>
+            <button type="button" class="clear-map">Clear</button>
+            <button type="button" class="reset-map">Default</button>
+          </div>
         </div>
       </div>
     </div>

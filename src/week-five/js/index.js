@@ -4,13 +4,15 @@ import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry';
 
 import PointerLockControls from './fps-controls';
 import enablePointerLock from './pointerlock';
+import { getMapFromUrl } from './editor';
 
-import levelMap from './map';
+import defaultMap from './map';
+
+let levelMap = getMapFromUrl() || defaultMap;
 
 import decalDiffuseImg from '../img/decal-diffuse.png';
 
 const DEBUG = window.location.hash === '#debug';
-const RANDOM_COLOR = window.location.hash === '#color';
 
 const MIN_SCALE = 30;
 const MAX_SCALE = 50;
@@ -154,6 +156,8 @@ const Game = (function () {
         size.set(scale, scale, scale);
 
         const material = decalMaterial.clone();
+        const RANDOM_COLOR = window.location.hash === '#color';
+
         if (RANDOM_COLOR) {
           material.color = new THREE.Color(0xffffff * Math.random());
         }
@@ -314,8 +318,6 @@ const Game = (function () {
 
     // HANDLE KEY INTERACTION
     function handleKeyInteraction(keyCode, boolean) {
-      let isKeyDown = boolean;
-
       switch (keyCode) {
         case 38: // up
         case 87: // w
@@ -335,6 +337,14 @@ const Game = (function () {
         case 39: // right
         case 68: // d
           controls.movements.right = boolean;
+          break;
+
+        case 67: // c
+          if (boolean) {
+            window.location.hash === '#color'
+              ? (window.location.hash = '')
+              : (window.location.hash = '#color');
+          }
           break;
 
         case 16: // shift

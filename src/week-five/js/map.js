@@ -1,4 +1,4 @@
-const map = `
+const textMap = `
 xxxxxxxxxxxxxxxxxxxxxxxxxxxXXxxxxxxx           
 x                x      x          x
 x        x       x      x          x
@@ -14,7 +14,23 @@ x     t                 x          x
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 `;
 
-export default map
+const emptyMap = `xxxxxxxxxxxxxxxXxxxxxxxxxxxxxxxxxxxx
+x                                  x
+x                                  x
+x                                  x
+x                                  x
+x                                  x
+X                                  X
+x                                  x
+x                                  x
+x                                  x
+x                                  x
+x                                  x
+xxxxxxxxxxxxxxxXxxxxxxxxxxxxxxxxxxxx`;
+
+export { textMap, emptyMap };
+
+export default textMap
   .trim()
   .split('\n')
   .map((row) => row.split(''));
