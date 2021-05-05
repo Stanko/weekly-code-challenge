@@ -1,4 +1,26 @@
-import * as THREE from 'three';
+import {
+  AmbientLight,
+  BoxGeometry,
+  BufferGeometry,
+  Color,
+  CylinderGeometry,
+  Euler,
+  Line,
+  LineBasicMaterial,
+  Matrix4,
+  Mesh,
+  MeshBasicMaterial,
+  MeshNormalMaterial,
+  MeshPhongMaterial,
+  PerspectiveCamera,
+  Raycaster,
+  Scene,
+  SphereGeometry,
+  TextureLoader,
+  Vector2,
+  Vector3,
+  WebGLRenderer,
+} from 'three';
 import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils';
 import { DecalGeometry } from 'three/examples/jsm/geometries/DecalGeometry';
 
@@ -26,23 +48,23 @@ const Game = (function () {
     let camera, scene, renderer;
     let controls;
     let mesh;
-    let raycaster = new THREE.Raycaster();
+    let raycaster = new Raycaster();
     let line;
     const exitBlocks = [];
 
     const intersection = {
       intersects: false,
-      point: new THREE.Vector3(),
-      normal: new THREE.Vector3(),
+      point: new Vector3(),
+      normal: new Vector3(),
     };
 
-    const mouse = new THREE.Vector2();
+    const mouse = new Vector2();
     const intersects = [];
 
-    const textureLoader = new THREE.TextureLoader();
+    const textureLoader = new TextureLoader();
     const decalDiffuse = textureLoader.load(decalDiffuseImg);
 
-    const decalMaterial = new THREE.MeshPhongMaterial({
+    const decalMaterial = new MeshPhongMaterial({
       specular: 0xffffff,
       map: decalDiffuse,
       transparent: true,
@@ -55,29 +77,29 @@ const Game = (function () {
 
     const decals = [];
     let mouseHelper;
-    const position = new THREE.Vector3();
-    const orientation = new THREE.Euler();
-    const size = new THREE.Vector3(10, 10, 10);
+    const position = new Vector3();
+    const orientation = new Euler();
+    const size = new Vector3(10, 10, 10);
 
     init();
     animate();
 
     function init() {
       eventHandlers();
-      scene = new THREE.Scene();
+      scene = new Scene();
 
-      scene.add(new THREE.AmbientLight(0xffffff));
+      scene.add(new AmbientLight(0xffffff));
 
-      const lineGeometry = new THREE.BufferGeometry();
-      lineGeometry.setFromPoints([new THREE.Vector3(), new THREE.Vector3()]);
+      const lineGeometry = new BufferGeometry();
+      lineGeometry.setFromPoints([new Vector3(), new Vector3()]);
 
-      line = new THREE.Line(lineGeometry, new THREE.LineBasicMaterial());
+      line = new Line(lineGeometry, new LineBasicMaterial());
       line.visible = false;
       scene.add(line);
 
       loadMap();
 
-      camera = new THREE.PerspectiveCamera(
+      camera = new PerspectiveCamera(
         80,
         window.innerWidth / window.innerHeight,
         1,
@@ -86,9 +108,9 @@ const Game = (function () {
       controls = new PointerLockControls(camera, 100, 20, [mesh]);
       scene.add(controls.getPlayer());
 
-      mouseHelper = new THREE.Mesh(
-        new THREE.SphereGeometry(1),
-        new THREE.MeshBasicMaterial({ color: 0x5097d5 })
+      mouseHelper = new Mesh(
+        new SphereGeometry(1),
+        new MeshBasicMaterial({ color: 0x5097d5 })
       );
       // mouseHelper.visible = false;
       scene.add(mouseHelper);
@@ -159,10 +181,10 @@ const Game = (function () {
         const RANDOM_COLOR = window.location.hash === '#color';
 
         if (RANDOM_COLOR) {
-          material.color = new THREE.Color(0xffffff * Math.random());
+          material.color = new Color(0xffffff * Math.random());
         }
 
-        const m = new THREE.Mesh(
+        const m = new Mesh(
           new DecalGeometry(mesh, position, orientation, size),
           material
         );
@@ -171,7 +193,7 @@ const Game = (function () {
         scene.add(m);
       }
 
-      renderer = new THREE.WebGLRenderer({ antialias: true }); //new THREE.WebGLRenderer();
+      renderer = new WebGLRenderer({ antialias: true }); //new WebGLRenderer();
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(window.innerWidth, window.innerHeight);
       enablePointerLock(controls);
@@ -230,17 +252,17 @@ const Game = (function () {
       const offsetX = blockSize * 2;
       const offsetZ = blockSize * 2;
 
-      const floor = new THREE.BoxGeometry(floorX, floorThickness, floorZ);
+      const floor = new BoxGeometry(floorX, floorThickness, floorZ);
       floor.applyMatrix4(
-        new THREE.Matrix4().makeTranslation(
+        new Matrix4().makeTranslation(
           (floorX - blockSize) / 2 - offsetX,
           floorThickness / -2,
           (floorZ - blockSize) / 2 - offsetZ
         )
       );
-      const ceiling = new THREE.BoxGeometry(floorX, floorThickness, floorZ);
+      const ceiling = new BoxGeometry(floorX, floorThickness, floorZ);
       ceiling.applyMatrix4(
-        new THREE.Matrix4().makeTranslation(
+        new Matrix4().makeTranslation(
           (floorX - blockSize) / 2 - offsetX,
           height + floorThickness / 2,
           (floorZ - blockSize) / 2 - offsetZ
@@ -253,16 +275,16 @@ const Game = (function () {
           let g = null;
 
           if (cell === 'x' || cell === 'X') {
-            g = new THREE.BoxGeometry(blockSize, height, blockSize);
+            g = new BoxGeometry(blockSize, height, blockSize);
           } else if (cell === 'o') {
-            g = new THREE.CylinderGeometry(r, r * 0.9, height, 32);
+            g = new CylinderGeometry(r, r * 0.9, height, 32);
           } else if (cell === 't') {
-            g = new THREE.SphereGeometry(r, 32, 32);
+            g = new SphereGeometry(r, 32, 32);
           }
 
           if (g) {
             g.applyMatrix4(
-              new THREE.Matrix4().makeTranslation(
+              new Matrix4().makeTranslation(
                 x * blockSize - offsetX,
                 height / 2,
                 z * blockSize - offsetZ
@@ -274,11 +296,11 @@ const Game = (function () {
                 z: z * blockSize - offsetZ,
               });
 
-              const exitMesh = new THREE.Mesh(
+              const exitMesh = new Mesh(
                 g,
                 DEBUG
-                  ? new THREE.MeshBasicMaterial({ color: 0xff0000 })
-                  : new THREE.MeshNormalMaterial()
+                  ? new MeshBasicMaterial({ color: 0xff0000 })
+                  : new MeshNormalMaterial()
               );
               scene.add(exitMesh);
             } else {
@@ -287,11 +309,11 @@ const Game = (function () {
           }
         });
       });
-      mesh = new THREE.Mesh(
+      mesh = new Mesh(
         BufferGeometryUtils.mergeBufferGeometries(geometries),
         DEBUG
-          ? new THREE.MeshNormalMaterial()
-          : new THREE.MeshBasicMaterial({ color: 0x00000 })
+          ? new MeshNormalMaterial()
+          : new MeshBasicMaterial({ color: 0x00000 })
       );
 
       scene.add(mesh);

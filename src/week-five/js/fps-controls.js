@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { Object3D, Euler, Raycaster, Matrix4, Vector3 } from 'three';
 
 const PointerLockControls = function (
   camera,
@@ -12,10 +12,10 @@ const PointerLockControls = function (
 
   camera.rotation.set(0, 0, 0);
 
-  var pitchObject = new THREE.Object3D();
+  var pitchObject = new Object3D();
   pitchObject.add(camera);
 
-  var yawObject = new THREE.Object3D();
+  var yawObject = new Object3D();
   yawObject.position.y = playerHeight;
   yawObject.add(pitchObject);
 
@@ -53,8 +53,8 @@ const PointerLockControls = function (
   scope.getDirection = (function () {
     // assumes the camera itself is not rotated
 
-    var direction = new THREE.Vector3(0, 0, -1);
-    var rotation = new THREE.Euler(0, 0, 0, 'YXZ');
+    var direction = new Vector3(0, 0, -1);
+    var rotation = new Euler(0, 0, 0, 'YXZ');
 
     return function (v) {
       rotation.set(pitchObject.rotation.x, yawObject.rotation.y, 0);
@@ -72,44 +72,14 @@ const PointerLockControls = function (
   };
 
   scope.raycasters = {
-    down: new THREE.Raycaster(
-      new THREE.Vector3(),
-      new THREE.Vector3(0, -1, 0),
-      0,
-      20
-    ),
-    up: new THREE.Raycaster(
-      new THREE.Vector3(),
-      new THREE.Vector3(0, 1, 0),
-      0,
-      20
-    ),
-    forward: new THREE.Raycaster(
-      new THREE.Vector3(),
-      new THREE.Vector3(0, 0, -1),
-      0,
-      15
-    ),
-    backward: new THREE.Raycaster(
-      new THREE.Vector3(),
-      new THREE.Vector3(),
-      0,
-      15
-    ),
-    left: new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(), 0, 15),
-    right: new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(), 0, 15),
-    rightStrafe: new THREE.Raycaster(
-      new THREE.Vector3(),
-      new THREE.Vector3(),
-      0,
-      30
-    ),
-    leftStrafe: new THREE.Raycaster(
-      new THREE.Vector3(),
-      new THREE.Vector3(),
-      0,
-      30
-    ),
+    down: new Raycaster(new Vector3(), new Vector3(0, -1, 0), 0, 20),
+    up: new Raycaster(new Vector3(), new Vector3(0, 1, 0), 0, 20),
+    forward: new Raycaster(new Vector3(), new Vector3(0, 0, -1), 0, 15),
+    backward: new Raycaster(new Vector3(), new Vector3(), 0, 15),
+    left: new Raycaster(new Vector3(), new Vector3(), 0, 15),
+    right: new Raycaster(new Vector3(), new Vector3(), 0, 15),
+    rightStrafe: new Raycaster(new Vector3(), new Vector3(), 0, 30),
+    leftStrafe: new Raycaster(new Vector3(), new Vector3(), 0, 30),
 
     updateRaycasters: function () {
       this.up.ray.origin.copy(scope.playersPosition);
@@ -118,25 +88,19 @@ const PointerLockControls = function (
       this.backward.ray.set(scope.playersPosition, scope.camDir.negate());
       this.left.ray.set(
         scope.playersPosition,
-        scope.camDir.applyMatrix4(
-          new THREE.Matrix4().makeRotationY(-(Math.PI / 2))
-        )
+        scope.camDir.applyMatrix4(new Matrix4().makeRotationY(-(Math.PI / 2)))
       );
       this.right.ray.set(
         scope.playersPosition,
-        scope.camDir.applyMatrix4(new THREE.Matrix4().makeRotationY(Math.PI))
+        scope.camDir.applyMatrix4(new Matrix4().makeRotationY(Math.PI))
       );
       this.rightStrafe.ray.set(
         scope.playersPosition,
-        scope.camDir.applyMatrix4(
-          new THREE.Matrix4().makeRotationY(Math.PI / 4)
-        )
+        scope.camDir.applyMatrix4(new Matrix4().makeRotationY(Math.PI / 4))
       ); // Working
       this.leftStrafe.ray.set(
         scope.playersPosition,
-        scope.camDir.applyMatrix4(
-          new THREE.Matrix4().makeRotationY(Math.PI / 4)
-        )
+        scope.camDir.applyMatrix4(new Matrix4().makeRotationY(Math.PI / 4))
       );
     },
   };
@@ -203,7 +167,7 @@ const PointerLockControls = function (
   scope.originalMass = mass;
   scope.walkingSpeed = 3000; // Higher = slower
   scope.speed = 900; // Movement speed
-  scope.velocity = new THREE.Vector3(1, 1, 1);
+  scope.velocity = new Vector3(1, 1, 1);
 
   scope.walking = false;
 
@@ -234,7 +198,7 @@ const PointerLockControls = function (
         ? 9.8 * scope.mass * scope.delta
         : 5.5 * scope.mass * scope.delta; // Up and Down
 
-      scope.camDir = new THREE.Vector3();
+      scope.camDir = new Vector3();
       scope.getPlayer().getWorldDirection(scope.camDir);
       scope.camDir.negate();
       scope.playersPosition = scope.getPlayer().position.clone();
