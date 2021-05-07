@@ -17,6 +17,12 @@ body {
   padding: 20px 0;
 }
 
+h1 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fefefe;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -51,7 +57,7 @@ body {
 
 .space-img {
   background-color: #000;
-  background-image: url('../img/space3.jpg');
+  background-image: url('../img/space.jpg');
   background-size: cover;
   background-position: center center;
   position: absolute;
