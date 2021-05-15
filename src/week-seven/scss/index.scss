@@ -1,0 +1,376 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 1px;
+}
+
+@media (min-width: 600px) {
+  html {
+    font-size: 1.5px;
+  }
+}
+
+@media (min-width: 1000px) {
+  html {
+    font-size: 2px;
+  }
+}
+
+@media (min-width: 1400px) {
+  html {
+    font-size: 3px;
+  }
+}
+
+body {
+  line-height: 1.4em;
+  text-align: center;
+  background-color: #6c86a0;
+  color: #fff;
+  font-size: 16px;
+  padding: 100rem 20px 100rem;
+}
+
+.wrapper {
+  transform-style: preserve-3d;
+  transform: rotateY(60deg) rotateX(5deg);
+  margin-bottom: 50px;
+
+  * {
+    transform-style: preserve-3d;
+  }
+}
+
+.info {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+button {
+  color: #fff;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 300ms, border-color 300ms;
+
+  &:hover {
+    color: #78d9bd;
+    border-bottom-color: #78d9bd;
+  }
+}
+
+// -------- BOX
+
+css-box {
+  display: block;
+  position: relative;
+
+  > div {
+    position: absolute;
+    border: 1rem solid rgba(black, 0.2);
+    background: white;
+    // background: rgba(white, 0.7);
+  }
+}
+
+@mixin cube($width, $height, $depth) {
+  width: $width;
+  height: $height;
+
+  .left,
+  .right,
+  .front,
+  .back {
+    width: $depth;
+    height: $height;
+  }
+
+  .front,
+  .back {
+    width: $width;
+    height: $height;
+  }
+
+  .top,
+  .bottom {
+    width: $width;
+    height: $depth;
+  }
+
+  .front {
+    transform: translateZ($depth / 2);
+  }
+
+  .back {
+    transform: translateZ($depth / -2) rotateY(180deg);
+  }
+
+  .left {
+    transform: translateX($depth / -2) rotateY(270deg);
+  }
+
+  .right {
+    transform: translateX($width - $depth / 2) rotateY(90deg);
+  }
+
+  .top {
+    transform: translateY($depth / -2) rotateX(90deg);
+  }
+
+  .bottom {
+    transform: translateY($height - $depth / 2) rotateX(90deg);
+  }
+}
+
+$time: 3s;
+
+// ------------- ROW
+
+.row {
+  display: flex;
+  justify-content: center;
+  width: 200vw;
+  margin-left: -50vw;
+}
+
+// ------------- PERSON
+
+css-person {
+  display: flex;
+  flex-wrap: wrap;
+  width: 54rem;
+  margin-right: 12rem;
+}
+
+$tshirt-colors: #9b59b6, #1abc9c, #e74c3c, #f1c40f, #3498db, #e67e22, #34495e;
+$shoes-colors: #2b071f, #ffe600, #345, #ecf0f1, #0abde3, #6c5ce7;
+$pants-colors: #1e3799, #198066, #510b6d, #2c3e50, #d35400, #95a5a6;
+$skin-colors: #d8b997, #bb9471, #966946, #473a30;
+
+@for $i from 1 through 20 {
+  css-person:nth-child(#{$i}) {
+    &,
+    & * {
+      animation-delay: $i * 0.3s;
+    }
+
+    $tshirt-color: nth($tshirt-colors, random(length($tshirt-colors)));
+    $shoes-color: nth($shoes-colors, random(length($shoes-colors)));
+    $pants-color: nth($pants-colors, random(length($pants-colors)));
+    $skin-color: nth($skin-colors, random(length($skin-colors)));
+
+    .head *,
+    .arm-bottom * {
+      background: $skin-color;
+    }
+
+    .torso *,
+    .arm-top * {
+      background: $tshirt-color;
+    }
+
+    .leg-top *,
+    .leg-bottom * {
+      background-color: $pants-color;
+    }
+
+    .leg-shoe * {
+      background-color: $shoes-color;
+    }
+  }
+}
+
+// ------------- TOP
+
+@keyframes person-top {
+  0% {
+    transform: translateZ(-7rem) translateY(-15rem) rotateX(-5deg);
+  }
+  50% {
+    transform: translateZ(16rem) translateY(-33rem) rotateX(0deg);
+  }
+}
+
+.person-top {
+  display: flex;
+  flex-wrap: wrap;
+  transform: translateZ(-7rem) translateY(-15rem) rotateX(-5deg);
+  // transform: translateZ(16rem) translateY(-33rem) rotateX(0deg);
+  animation: person-top $time ease-in-out infinite;
+}
+
+// ------------- HEAD
+
+.head-wrapper {
+  flex-basis: 100%;
+  margin-bottom: 2rem;
+}
+
+@keyframes head {
+  0% {
+    transform: rotateX(3deg);
+  }
+  50% {
+    transform: rotateX(7deg);
+  }
+}
+
+.head {
+  @include cube(15rem, 20rem, 15rem);
+  margin: 0 auto;
+  transform: rotateX(3deg);
+  animation: head $time ease-in-out infinite;
+}
+
+// ------------- TORSO
+
+.torso {
+  @include cube(30rem, 45rem, 15rem);
+  margin: 0 2rem;
+  position: relative;
+  z-index: 100;
+}
+
+// ------------- ARMS
+
+@keyframes arm {
+  0% {
+    transform: translateZ(-4rem) rotateX(60deg);
+  }
+  50% {
+    transform: translateZ(-4rem) rotateX(150deg);
+  }
+}
+
+.arm {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center;
+  transform: translateZ(-4rem) rotateX(60deg);
+  animation: arm $time ease-in-out infinite;
+  margin-top: 10rem;
+}
+
+// .arm-right,
+// .arm-right * {
+//   animation-delay: 0.1s;
+// }
+
+@keyframes arm-top {
+  0% {
+    transform: rotateX(-40deg);
+  }
+  50% {
+    transform: rotateX(0deg);
+  }
+}
+
+.arm-top {
+  @include cube(10rem, 30rem, 10rem);
+  transform: rotateX(-40deg);
+  animation: arm-top $time ease-in-out infinite;
+  position: relative;
+  z-index: 50;
+}
+
+@keyframes arm-bottom {
+  0% {
+    transform: rotateX(40deg);
+  }
+  50% {
+    transform: rotateX(0deg) translateZ(0rem);
+  }
+}
+
+.arm-bottom {
+  @include cube(9rem, 30rem, 9rem);
+  margin-top: -4rem;
+  transform: rotateX(40deg);
+  animation: arm-bottom $time ease-in-out infinite;
+}
+
+// ------------- LEGS
+
+.legs {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: -18rem;
+  transform: translateZ(18rem) translateY(-14rem);
+}
+
+.leg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leg-left {
+  margin-right: 2rem;
+}
+
+// .leg-left,
+// .leg-left * {
+//   animation-delay: 1s;
+// }
+
+@keyframes leg-top {
+  0% {
+    transform: translateZ(-15rem) rotateX(-10deg);
+  }
+  50% {
+    transform: translateZ(-6rem) translateY(-15rem) rotateX(-88deg);
+  }
+}
+
+.leg-top {
+  @include cube(12rem, 12rem, 40rem);
+  transform-origin: bottom center;
+  transform: translateZ(-15rem) rotateX(-10deg);
+  // transform: translateZ(-7rem) translateY(-15rem) rotateX(-88deg);
+  animation: leg-top $time ease-in-out infinite;
+  position: relative;
+  z-index: 50;
+}
+
+@keyframes leg-bottom {
+  0% {
+    transform: rotateX(-15deg);
+  }
+  50% {
+    transform: rotateX(-2deg) translateY(-2rem);
+  }
+}
+
+.leg-bottom {
+  @include cube(10rem, 30rem, 10rem);
+  transform: rotateX(-15deg);
+  animation: leg-bottom $time ease-in-out infinite;
+}
+
+@keyframes leg-shoe {
+  0% {
+    transform: translateZ(3rem);
+  }
+  50% {
+    transform: translateZ(3rem) translateY(-2rem) rotateX(-15deg);
+  }
+}
+
+.leg-shoe {
+  @include cube(11rem, 8rem, 20rem);
+  animation: leg-shoe $time ease-in-out infinite;
+  transform: translateZ(3rem);
+}
