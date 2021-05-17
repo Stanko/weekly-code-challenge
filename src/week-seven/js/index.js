@@ -48,18 +48,21 @@ class Person extends HTMLElement {
 
 window.customElements.define('css-person', Person);
 
-const wrapper = document.querySelector('.wrapper');
+// const wrapper = document.querySelector('.wrapper');
 
-window.addEventListener('mousemove', (e) => {
-  wrapper.style.transform = `rotateY(${
-    (e.clientX / window.innerWidth) * 360
-  }deg) rotateX(5deg)`;
-});
+// window.addEventListener('mousemove', (e) => {
+//   wrapper.style.transform = `rotateY(${
+//     (e.clientX / window.innerWidth) * 360
+//   }deg) rotateX(5deg)`;
+// });
 
 const addMoreButton = document.querySelector('.add-more-button');
 const row = document.querySelector('.row');
 
 addMoreButton.addEventListener('click', () => {
+  if (document.querySelectorAll('css-person').length >= 50) {
+    return;
+  }
   row.innerHTML += `<css-person></css-person>`;
 });
 
