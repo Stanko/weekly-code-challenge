@@ -60,7 +60,7 @@ const addMoreButton = document.querySelector('.add-more-button');
 const row = document.querySelector('.row');
 
 addMoreButton.addEventListener('click', () => {
-  if (document.querySelectorAll('css-person').length >= 50) {
+  if (document.querySelectorAll('css-person').length >= 30) {
     return;
   }
   row.innerHTML += `<css-person></css-person>`;
