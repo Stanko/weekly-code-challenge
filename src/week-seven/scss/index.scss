@@ -156,7 +156,7 @@ css-person {
 $tshirt-colors: #9b59b7, #1abc9d, #e74c3c, #f1c40f, #3498db, #e67e22, #34495e;
 $shoes-colors: #2b071f, #ffe600, #345, #ecf0f1, #0abde3, #6c5ce7;
 $pants-colors: #1e3799, #198066, #510b6d, #2c3e50, #d35400, #95a5a6;
-$skin-colors: #d8b997, #bb9471, #966946, #473a30;
+$skin-colors: #d8b997, #bb9472, #966946, #473a30;
 
 @for $i from 1 through 30 {
   css-person:nth-child(#{$i}) {
