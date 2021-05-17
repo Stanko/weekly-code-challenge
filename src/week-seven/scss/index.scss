@@ -80,7 +80,7 @@ css-box {
     position: absolute;
     border: 1rem solid rgba(black, 0.2);
     background: white;
-    // background: rgba(white, 0.7);
+    backface-visibility: hidden;
   }
 }
 
@@ -129,7 +129,7 @@ css-box {
   }
 
   .bottom {
-    transform: translateY($height - $depth / 2) rotateX(90deg);
+    transform: translateY($height - $depth / 2) rotateX(-90deg);
   }
 }
 
@@ -158,7 +158,7 @@ $shoes-colors: #2b071f, #ffe600, #345, #ecf0f1, #0abde3, #6c5ce7;
 $pants-colors: #1e3799, #198066, #510b6d, #2c3e50, #d35400, #95a5a6;
 $skin-colors: #d8b997, #bb9471, #966946, #473a30;
 
-@for $i from 1 through 20 {
+@for $i from 1 through 50 {
   css-person:nth-child(#{$i}) {
     &,
     & * {
